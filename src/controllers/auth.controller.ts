@@ -24,6 +24,11 @@ class AuthController {
         }
     }
 
+    async signout(req: Request, res: Response) {
+        res.clearCookie('token')
+        res.status(200).send({ message: true })
+    }
+
     async authorize(req: Request, res: Response) {
         try {
             res.status(200).send({ id: res.locals.payload.id })
