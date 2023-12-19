@@ -1,25 +1,20 @@
 version: '3'
 
 services:
-  db:
+  database:
     image: postgres:alpine
+    network_mode: host
     environment:
       - POSTGRES_PASSWORD=12345
-    ports:
-      - 5432:5432
     volumes:
       - ./init.db.sql:/docker-entrypoint-initdb.d/init.db.sql
-      - ./data:/var/lib/postgresql/data
-  api:
+  server:
     image: node:latest
-    user: "node"
+    network_mode: host
+    user: node
     working_dir: /home/node/app
-    environment:
-      - NODE_ENV=production
     volumes:
       - ./:/home/node/app
-    expose:
-      - "3630"
-    ports:
-      - 3630:3630
-    command: "npm start"
+    depends_on:
+      - database
+    command: bash -c "npm i && npm start"

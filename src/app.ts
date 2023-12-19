@@ -1,5 +1,4 @@
 import express, { Request, Response } from 'express'
-import { router } from './routes'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import { dataSource } from './config/database'
@@ -14,8 +13,6 @@ app.use(cors({
 }))
 
 dataSource.initialize()
-
-app.use('/api', router)
 
 app.get('/', (req: Request, res: Response): Response => {
     return res.status(200).json({ message: 'Hello World!' })
