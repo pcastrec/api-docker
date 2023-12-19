@@ -1,5 +1,5 @@
-import { Account } from "./account";
+// import { Account } from "./account";
 
-export const entities = [
-    Account
-]
+// export const entities = [
+//     Account
+// ]
