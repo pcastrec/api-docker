@@ -1,5 +1,3 @@
-import { Account } from "./account";
+import { User } from "./User";
 
-export const entities = [
-    Account
-]
+export const entities = [User]
