@@ -32,7 +32,7 @@ describe("API Test", () => {
 
     it("should create a user", (done) => {
         server
-            .post("/api/thomas/users")
+            .post("/thomas/users")
             .send(userData)
             .expect(201)
             .end((err, res) => {
@@ -45,7 +45,7 @@ describe("API Test", () => {
 
     it("should fail on create a user", (done) => {
         server
-            .post("/api/thomas/users")
+            .post("/thomas/users")
             .send(userData)
             .expect(400)
             .end((err, res) => {
@@ -59,7 +59,7 @@ describe("API Test", () => {
 
     it("should return one user by firmname", (done) => {
         server
-        .get("/api/thomas/users/" + user.firmname)
+        .get("/thomas/users/" + user.firmname)
         .expect(200)
         .end((err, res) => {
             if (err) return done(err);
@@ -70,7 +70,7 @@ describe("API Test", () => {
 
     it("should return all users", (done) => {
         server
-        .get("/api/thomas/users")
+        .get("/thomas/users")
         .expect(200)
         .end((err, res) => {
             if (err) return done(err);
@@ -82,7 +82,7 @@ describe("API Test", () => {
 
     it("should update user successfully", (done) => {
         server
-        .put("/api/thomas/users/" + user.firmname)
+        .put("/thomas/users/" + user.firmname)
         .send({
             firstname: "teeeeeeest",
             lastname: "tessssssssssst"
@@ -99,7 +99,7 @@ describe("API Test", () => {
 
     it("should fail to update user due to validation errors", (done) => {
         server
-        .put("/api/thomas/users/" + user.firmname)
+        .put("/thomas/users/" + user.firmname)
         .send({
             email: "invalid-email",
         })
@@ -117,7 +117,7 @@ describe("API Test", () => {
 
     it("should delete user successfully", (done) => {
         server
-        .delete("/api/thomas/users/" + user.firmname)
+        .delete("/thomas/users/" + user.firmname)
         .expect(200)
         .end((err, res) => {
             if (err) return done(err);
@@ -130,7 +130,7 @@ describe("API Test", () => {
 
     it("should not found user on delete", (done) => {
         server
-        .delete("/api/thomas/users/" + user.firmname)
+        .delete("/thomas/users/" + user.firmname)
         .expect(404)
         .end((err, res) => {
             if (err) return done(err);
