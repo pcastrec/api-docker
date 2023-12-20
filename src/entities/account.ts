@@ -28,20 +28,12 @@ export class Account extends BaseEntity {
     firstname!: string
 
     @Column()
-    @IsNotEmpty()
     lastname!: string
 
-    @Column({ nullable: true })
-    avatar!: string
 
-    @Column({ nullable: true })
-    birthdate!: Date
-
-    @CreateDateColumn()
-    createdAt!: Date
-
-    @UpdateDateColumn()
-    updatedAt!: Date
+    @Column()
+    @IsNotEmpty()
+    firm_name!: string
 
     @BeforeInsert()
     // @BeforeUpdate()
