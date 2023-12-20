@@ -4,7 +4,7 @@ import cookieParser from 'cookie-parser'
 import { dataSource } from './config/database'
 import router from './routes';
 
-export const app = express()
+export const app = express();
 
 app.use(cookieParser())
 app.use(express.json())

@@ -1,5 +1,5 @@
 import { DataSource, DataSourceOptions } from "typeorm";
-// import { entities } from "../entities";
+import { entities } from "../entities";
 import dotenv from 'dotenv'
 
 dotenv.config()
@@ -11,7 +11,7 @@ const config: DataSourceOptions = {
     username: String(process.env.PG_USER),
     password: String(process.env.PG_PASSWORD),
     database: String(process.env.PG_DATABASE),
-    // entities: entities,
+    entities: entities,
     synchronize: true,
     // logging: true
 }
