@@ -13,7 +13,7 @@ export const updateUser = async (req: Request, res: Response) => {
         const existingUser = await Account.findOneBy({ firmname: req.params.id  });
 
         if (!existingUser) {
-            return res.status(404).json({ message: 'Utilisateur non trouvé' });
+            return res.status(403).json({ message: 'Utilisateur non trouvé' });
         }
 
         const updateData = req.body;

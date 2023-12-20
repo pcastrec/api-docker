@@ -6,10 +6,10 @@ describe("Users", () => {
 
     let server: SuperTest<Test>;
 
-    beforeAll(() => {
-        server = supertest(app);
-        return dataSource.initialize();
-    });
+    beforeAll(async () => {
+        server = supertest(app)
+        await dataSource.initialize()
+    })
 
     it("should return all users", (done) => {
         server
