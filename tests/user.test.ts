@@ -11,26 +11,24 @@ describe("Users", () => {
         return dataSource.initialize();
     });
 
-    it("should return all users", (done) => {
+    it("should return all users", async() => {
         server
         .get("/users")
         .expect(200)
         .end((err, res) => {
-            if (err) return done(err);
+            if (err) return err;
             expect(res.body).toBeTruthy();
-            done();
+
         });
     });
 
-    // c le travail d'alexandre (oui c moi ka fé ça) et il a trop bien joué
-    it("should fail on return all users 😳", (done) => {
+    it("should fail on return all users", async() => {
         server
         .get("/users")
         .expect(404)
         .end((err, res) => {
-            if (err) return done(err);
+            if (err) return err;
             expect(res.body).toBeFalsy();
-            done();
         });
     });
 
