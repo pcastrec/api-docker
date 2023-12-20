@@ -1,5 +1,3 @@
-// import { Account } from "./account";
-
-// export const entities = [
-//     Account
-// ]
+export const entities = [
+    // Account
+]
