@@ -1,4 +1,4 @@
-import { BaseEntity, BeforeInsert, BeforeUpdate, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { BaseEntity, BeforeInsert, BeforeUpdate, Column, CreateDateColumn, Entity, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { EmailValidator } from "../validators/emailValidator";
 import { IsNotEmpty } from "class-validator";
 import { hash } from "bcrypt";
@@ -11,8 +11,8 @@ export class Account extends BaseEntity {
         Object.assign(this, params)
     }
 
-    @PrimaryGeneratedColumn()
-    id!: number;
+    @PrimaryColumn()
+    firmname!: string;
 
     @Column({ unique: true })
     @IsNotEmpty()
@@ -30,10 +30,23 @@ export class Account extends BaseEntity {
     @Column()
     lastname!: string
 
+    @Column()
+    phone!: string
+
+    @UpdateDateColumn()
+    updatedAt!: Date
+
+    @CreateDateColumn()
+    createdAt!: Date
 
     @Column()
-    @IsNotEmpty()
-    firm_name!: string
+    lastPickedUp!: Date
+
+    @Column({ default: false })
+    hasEmail!: Boolean
+
+    @Column({ default: false })
+    isAdmin!: Boolean
 
     @BeforeInsert()
     // @BeforeUpdate()
