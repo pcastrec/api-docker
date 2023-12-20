@@ -36,7 +36,7 @@ thomasRouter.get("/users/:firmname", async (req: Request, res: Response) => {
     const repo = dataSource.getRepository(Account);
 
     try {
-        const user = await repo.findOneOrFail({where: { firmname }});
+        const user = await repo.findOne({where: { firmname }});
 
         if (!user) {
             res.status(404).json({error: "No user found"});
@@ -59,6 +59,11 @@ thomasRouter.post("/users", async (req: Request, res: Response) => {
     try {
         const userData = req.body;
         const user = new Account(userData);
+
+        if (!userData || !userData.password) {
+            res.status(400).json({ error: "Invalid data" });
+            return;
+        }
 
         const existingUser = await repo.findOne({ where: { email: userData.email } });
 

@@ -43,7 +43,7 @@ describe("API Test", () => {
             });
     });
 
-    it("should fail on create a user", (done) => {
+    it("should fail on unique email user", (done) => {
         server
             .post("/thomas/users")
             .send(userData)
@@ -57,6 +57,20 @@ describe("API Test", () => {
             });
     });
 
+    it("should ask to create user", (done) => {
+        server
+            .post("/thomas/users")
+            .send({})
+            .expect(400)
+            .end((err, res) => {
+                if (err) return done(err);
+                expect(res.body).toMatchObject({
+                    error: "Invalid data"
+                });
+                done();
+            });
+    });
+
     it("should return one user by firmname", (done) => {
         server
         .get("/thomas/users/" + user.firmname)
@@ -64,6 +78,19 @@ describe("API Test", () => {
         .end((err, res) => {
             if (err) return done(err);
             expect(res.body).toMatchObject(user);
+            done();
+        });
+    });
+
+    it("should fail on return a user by firmname", (done) => {
+        server
+        .get("/thomas/users/Quantum%20Nebula%20Innovations")
+        .expect(404)
+        .end((err, res) => {
+            if (err) return done(err);
+            expect(res.body).toMatchObject({
+                error: "No user found"
+            });
             done();
         });
     });
