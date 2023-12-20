@@ -6,9 +6,9 @@ describe("Users", () => {
 
     let server: SuperTest<Test>;
 
-    beforeAll(() => {
+    beforeAll(async () => {
         server = supertest(app);
-        return dataSource.initialize();
+        await dataSource.initialize();
     });
 
     it("should return all users", async() => {
@@ -32,7 +32,7 @@ describe("Users", () => {
         });
     });
 
-    afterAll(() => {
-        return dataSource.destroy();
+    afterAll(async () => {
+        await dataSource.destroy();
     });
 });
