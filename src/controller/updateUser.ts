@@ -10,7 +10,7 @@ export const updateUser = async (req: Request, res: Response) => {
         const userId = req.params.id
         const userRepository = getRepository(User);
 
-        const existingUser = await userRepository.findOne(userId:);
+        const existingUser = await userRepository.findOne({ where: { id: userId } });
 
         if (!existingUser) {
             return res.status(404).json({ message: 'Utilisateur non trouvé' });
