@@ -19,4 +19,4 @@ app.get('/', (req: Request, res: Response): Response => {
     return res.status(200).json({ message: 'Hello World!' })
 });
 
-app.use('/', router);
+app.use('/api', router);

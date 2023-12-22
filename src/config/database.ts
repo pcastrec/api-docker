@@ -1,6 +1,6 @@
 import { DataSource, DataSourceOptions } from "typeorm";
-import { entities } from "../entities";
 import dotenv from 'dotenv'
+import { entities } from "../entities";
 
 dotenv.config()
 
@@ -13,7 +13,7 @@ const config: DataSourceOptions = {
     database: String(process.env.PG_DATABASE),
     entities: entities,
     synchronize: true,
-    // logging: true
+    //logging: true
 }
 
 export const dataSource = new DataSource(config)
