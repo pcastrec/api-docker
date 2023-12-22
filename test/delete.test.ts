@@ -1,11 +1,10 @@
 import supertest from "supertest"
 import { dataSource } from "../src/config/database"
 import { Account } from "../src/entities/account"
-import { app } from "../src/app"
 import { clear } from "./clear"
-import { ValidationError } from "class-validator"
+import { app } from "../src/app"
 
-describe('PUT', () => {
+describe('DELETE', () => {
 
     beforeAll(async () => {
         await dataSource.initialize()
@@ -32,26 +31,24 @@ describe('PUT', () => {
 
     afterAll(async () => await clear())
 
-    it('should update Capsole Crop into Capsule Corp', done => {
+    it('should delete capsole crop', done => {
         supertest(app)
-            .put('/api/users/Capsole Crop')
-            .send({ firmname: "Capsule Corp" })
+            .delete('/api/users/Capsole Crop')
             .expect(200)
             .end((err, res) => {
                 if (err) return done(err)
-                expect(res.body.firmname).toBe("Capsule Corp")
+                expect(res.body).toMatchObject({ deleted: 1 })
                 done()
             })
     })
 
-    it('shouldn\'t update email with invalid', done => {
+    it('should failed on deleting', done => {
         supertest(app)
-            .put('/api/users/Shinra')
-            .send({ email: "shinra" })
+            .delete('/api/users/pasla')
             .expect(400)
             .end((err, res) => {
                 if (err) return done(err)
-                expect(res.body).toBeInstanceOf(Array<ValidationError>)
+                expect(res.body).toMatchObject({ message: 'No match found for pasla' })
                 done()
             })
     })

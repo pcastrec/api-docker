@@ -6,7 +6,7 @@ import { compareSync } from "bcrypt"
 import { ValidationError } from "class-validator"
 import { clear } from "./clear"
 
-describe('POST /users', () => {
+describe('POST', () => {
 
     const account = new Account({
         firmname: 'Capsule Corp',

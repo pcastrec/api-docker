@@ -36,18 +36,31 @@ class UserController {
 
   async updateOne(req: Request, res: Response) {
     const { firmname } = req.params
+    const account = Account.create(req.body)
     try {
+      const errors = await validate(account, { skipMissingProperties: true })
+      if (errors.length > 0) throw errors
       const updated = await Account
         .createQueryBuilder()
         .update(Account)
-        .set({ ...req.body })
+        .set(account)
         .where("firmname = :firmname", { firmname })
         .returning('*')
         .execute()
       res.status(200).send(updated.raw[0])
     } catch (e) {
-      console.error(e)
       return res.status(400).send(e)
+    }
+  }
+
+  async deleteOne(req: Request, res: Response) {
+    const { firmname } = req.params
+    try {
+      const result = await Account.delete({ firmname })
+      if (result.affected === 0) throw new Error(`No match found for ${firmname}`)
+      res.status(200).send({ deleted: result.affected })
+    } catch (e: any) {
+      return res.status(400).send({ message: e.message })
     }
   }
 
